@@ -11,3 +11,65 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Single-brace syntax because this is required in bash and sh alike
+if [ -e "$HOME/env/etc/indeedrc" ]; then
+    . "$HOME/env/etc/indeedrc"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[[ -z $LC_ALL ]] && export LC_ALL=en_US.UTF-8
+
+# Change defaults
+POWERLEVEL9K_STATUS_VERBOSE=true
+POWERLEVEL9K_STATUS_OK=false
+
+POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE_ALWAYS=true
+
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=""
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=""
+
+POWERLEVEL9K_LEFT_SEGMENT_END_SEPARATOR=" $ "
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=" "
+
+POWERLEVEL9K_BACKGROUND_JOBS_ICON=""
+
+# Colors
+POWERLEVEL9K_DIR_HOME_FOREGROUND="blue"
+POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="red"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="black"
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="yellow"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="black"
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="black"
+
+POWERLEVEL9K_HISTORY_FOREGROUND="cyan"
+POWERLEVEL9K_HISTORY_BACKGROUND="black"
+
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND="yellow"
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND="black"
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="red"
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="black"
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="yellow"
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="black"
+
+POWERLEVEL9K_RAM_FOREGROUND="blue"
+POWERLEVEL9K_RAM_BACKGROUND="black"
+
+POWERLEVEL9K_STATUS_FOREGROUND="red"
+POWERLEVEL9K_STATUS_BACKGROUND="black"
+
+# Prompts
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('context' 'dir' 'vcs' 'dir_writable' 'ram' 'load' 'todo' 'command_execution_time' 'newline' 'history')
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('status' 'background_jobs')
+
+alias vim='DISPLAY= emacs'
+
+export HOBO_HOST=$USER
