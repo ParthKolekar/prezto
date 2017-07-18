@@ -18,10 +18,10 @@ fi
 #
 
 if [[ -z "$EDITOR" ]]; then
-  export EDITOR='nano'
+  export EDITOR='vim'
 fi
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nano'
+  export VISUAL='vim'
 fi
 if [[ -z "$PAGER" ]]; then
   export PAGER='less'
@@ -71,3 +71,43 @@ fi
 if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+#
+# Temporary Files
+#
+#
+# Set TMPDIR if the variable is not set/empty or the directory doesn't exist
+if [[ -z "${TMPDIR}" ]]; then
+  export TMPDIR="/tmp/zsh-${UID}"
+fi
+
+if [[ ! -d "${TMPDIR}" ]]; then
+  mkdir -m 700 "${TMPDIR}"
+fi
+
+export DISABLE_PYENV=true
+
+# BEGIN env Setup -- Managed by Ansible DO NOT EDIT.
+export ZSH_DISABLE_COMPFIX="true"
+
+
+# Setup INDEED_ENV_DIR earlier.
+if [ -z "${INDEED_ENV_DIR}" ]; then
+    export INDEED_ENV_DIR="/home/parthkolekar/env"
+fi
+
+# Single-brace syntax because this is required in bash, dash, zsh, etc
+if [ -e "${INDEED_ENV_DIR}/etc/indeed_profile" ]; then
+    . "${INDEED_ENV_DIR}/etc/indeed_profile"
+fi
+
+# Add ~/env/bin to your PATH to use the shared shell scripts from delivery/env
+if [ -d "${INDEED_ENV_DIR}/bin" ]; then
+    PATH="${INDEED_ENV_DIR}/bin:$PATH"
+fi
+
+# END env Setup -- Managed by Ansible DO NOT EDIT.
+
+# Add krew
+export PATH="$PATH:$HOME/.krew/bin"
+
